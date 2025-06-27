@@ -16,7 +16,7 @@ const UsuarioSchema = new mongoose.Schema({
     required: true,
   },
   record: {
-    type: String,
+    type: int,
     required: false, //agora opcional
   },
   tipo: {
