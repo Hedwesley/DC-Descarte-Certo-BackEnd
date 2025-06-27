@@ -84,6 +84,7 @@ exports.loginUsuario = async (req, res) => {
       usuarioId: usuario._id,
       nome: usuario.nome,
       email: usuario.email,
+      record: usuario.record // <-- adiciona o campo
     });
   } catch (error) {
     res.status(500).json({ erro: 'Erro ao fazer login', detalhes: error.message });
