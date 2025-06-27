@@ -16,7 +16,7 @@ const UsuarioSchema = new mongoose.Schema({
     required: true,
   },
   record: {
-    type: int,
+    type: Number,
     required: false, //agora opcional
   },
   tipo: {
