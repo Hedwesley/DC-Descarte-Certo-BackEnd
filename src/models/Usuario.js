@@ -15,9 +15,9 @@ const UsuarioSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  CEP: {
+  record: {
     type: String,
-    required: true,
+    required: false, //agora opcional
   },
   tipo: {
     type: String,
