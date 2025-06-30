@@ -1,29 +1,36 @@
+
 # 🛠️ DC – Descarte Certo | Back-End
 
-Este é o repositório do back-end do projeto Descarte Certo (DC), uma plataforma para promover o descarte correto de resíduos sólidos em São Luís - MA. A API foi construída com Node.js, Express e MongoDB, fornecendo endpoints para autenticação de usuários, denúncias e acesso seguro a funcionalidades exclusivas.
+Este é o repositório do back-end do projeto Descarte Certo (DC), uma plataforma criada para promover o descarte correto de resíduos sólidos, com foco em cidades como São Luís – MA. A API foi construída com Node.js, Express e MongoDB, fornecendo endpoints para cadastro, login, denúncias, conteúdo educativo e pontos de coleta.
 
 ---
 
 ## 🚀 Funcionalidades da API
 
-- 👤 Cadastro e login de usuários
-- 🔒 Autenticação com tokens JWT
-- 📁 Criação e consulta de denúncias
-- 🧾 Validação de sessão via token
-- 🧠 Middleware de segurança para rotas privadas
-- 🔗 Integração com o front-end em consumo de dados via JSON
+- 👤 Cadastro e login de usuários com nome, e-mail, senha e campo opcional "record"
+- 🗺️ Atualização do campo record para ranqueamento do usuário
+- 📢 Cadastro e listagem de denúncias de descarte irregular
+- 📚 Cadastro e consulta de conteúdos educativos
+- 📍 Registro e listagem de pontos de coleta
+- 🔗 Integração com o front-end via JSON
 
 ---
 
-## 🧪 Rotas Principais
+## 🔌 Endpoints principais
 
-| Método | Rota               | Descrição                           | Protegida |
-|--------|--------------------|--------------------------------------|-----------|
-| POST   | /api/usuarios      | Cadastra novo usuário                | ❌        |
-| POST   | /api/login         | Realiza login                        | ❌        |
-| GET    | /api/usuarios/me   | Retorna dados do usuário logado      | ✅        |
-| POST   | /api/denuncias     | Cria nova denúncia                   | ✅        |
-| GET    | /api/denuncias     | Lista todas as denúncias             | ✅        |
+| Método | Rota                    | Descrição                                     |
+|--------|-------------------------|-----------------------------------------------|
+| POST   | /api/usuarios           | Cria um novo usuário                          |
+| POST   | /api/usuarios/login     | Realiza login do usuário                      |
+| GET    | /api/usuarios           | Lista todos os usuários                       |
+| PUT    | /api/usuarios/:id       | Atualiza dados de um usuário (ex: record)     |
+| DELETE | /api/usuarios/:id       | Remove um usuário                             |
+| POST   | /api/denuncias          | Cria nova denúncia                            |
+| GET    | /api/denuncias          | Lista todas as denúncias                      |
+| POST   | /api/conteudos          | Adiciona conteúdo educativo                   |
+| GET    | /api/conteudos          | Lista conteúdos educativos                    |
+| POST   | /api/pontos             | Registra novo ponto de coleta                 |
+| GET    | /api/pontos             | Lista todos os pontos de coleta               |
 
 ---
 
@@ -35,77 +42,103 @@ Este é o repositório do back-end do projeto Descarte Certo (DC), uma plataform
 - JSON Web Token (JWT)
 - Dotenv
 - Cors
-- Nodemon (desenvolvimento)
+- Nodemon (ambiente de desenvolvimento)
 
 ---
 
-## 📦 Instalação Local
+## 📦 Instalação local
 
 1. Clone o repositório:
 
 ```bash
-git clone https://github.com/seu-usuario/DC-backend.git
-cd DC-backend
-Instale as dependências:
+git clone https://github.com/seu-usuario/DC-Descarte-Certo-BackEnd.git
+cd DC-Descarte-Certo-BackEnd
+```
 
-bash
-Copiar
-Editar
+2. Instale as dependências:
+
+```bash
 npm install
-Crie um arquivo .env com as variáveis:
+```
 
-ini
-Copiar
-Editar
-PORT=3000
-MONGO_URI=your_mongo_connection_string
-JWT_SECRET=sua_chave_secreta
-Inicie o servidor:
+3. Crie um arquivo `.env` com o conteúdo:
 
-bash
-Copiar
-Editar
-npm run dev
-Servidor disponível em: http://localhost:3000
+```env
+PORT=5000
+MONGODB_URI=your_mongodb_connection_string
+```
 
-📁 Estrutura de Arquivos
-pgsql
-Copiar
-Editar
+4. Inicie o servidor:
+
+```bash
+node server.js
+```
+
+> O servidor será iniciado em http://localhost:5000
+
+---
+
+## 📁 Estrutura de pastas
+
+```
 /
-├── controllers/
-│   ├── authController.js
-│   └── denunciaController.js
-├── middleware/
-│   └── authMiddleware.js
-├── models/
-│   ├── Usuario.js
-│   └── Denuncia.js
-├── routes/
-│   ├── authRoutes.js
-│   └── denunciaRoutes.js
-├── .env
 ├── server.js
+├── .env
 ├── package.json
-🔐 Segurança
-As rotas protegidas exigem header Authorization com token válido:
-Authorization: Bearer {seu_token_jwt}
+└── src/
+    ├── config/
+    │   └── db.js
+    ├── controllers/
+    │   ├── usuario.controller.js
+    │   ├── denuncia.controller.js
+    │   ├── conteudo.controller.js
+    │   └── ponto.controller.js
+    ├── models/
+    │   ├── Usuario.js
+    │   ├── denuncia.model.js
+    │   ├── conteudo.model.js
+    │   └── ponto.model.js
+    └── routes/
+        ├── usuario.routes.js
+        ├── denuncia.routes.js
+        ├── conteudo.routes.js
+        └── ponto.routes.js
+```
 
-Senhas são armazenadas com bcrypt e não ficam expostas.
+---
 
-🌍 Integração com o Front-End
-O front-end consome a API via fetch/AJAX com o token JWT no localStorage.
+## 🧪 Testando o endpoint de atualização (record)
 
-A API responde com status HTTP padrão (200, 401, 403, 500 etc).
+Para atualizar apenas o campo record de um usuário logado:
 
-👨‍💻 Desenvolvedores
-Este back-end foi desenvolvido como parte do projeto Descarte Certo – Desafio 4 do Programa Trilhas 2B:
+```http
+PUT /api/usuarios/{id}
+Content-Type: application/json
 
-👤 Hedwesley – Node.js & MongoDB
+{
+  "record": 5
+}
+```
 
-👤 Hedwesley – Integração Front x Back
+---
 
-📄 Licença
-Este projeto é livre para fins educacionais e sociais, sem fins lucrativos.
+## 🌐 Deploy
 
-🟢 Projeto em constante evolução com foco em sustentabilidade, cidadania e tecnologia!
+- Front-end hospedado na Vercel
+- Back-end (esta API) hospedado no Render: https://dc-descarte-certo-backend.onrender.com
+
+---
+
+## 👨‍💻 Desenvolvedor
+
+Projeto criado por:
+
+- Hedwesley Gusmão – Back-End com Node.js, MongoDB & Integração com Front-End
+
+---
+
+## 📄 Licença
+
+Este projeto é de uso livre para fins educacionais e sociais. Sem fins lucrativos.
+
+🟢 Em constante evolução com foco em sustentabilidade, cidadania e tecnologia.
