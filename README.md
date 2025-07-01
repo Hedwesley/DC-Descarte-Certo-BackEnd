@@ -1,7 +1,7 @@
 
-# 🛠️ DC – Descarte Certo | Back-End
+# 🛠️ API | Back-End
 
-Este é o repositório do back-end do projeto Descarte Certo (DC), uma plataforma criada para promover o descarte correto de resíduos sólidos, com foco em cidades como São Luís – MA. A API foi construída com Node.js, Express e MongoDB, fornecendo endpoints para cadastro, login, denúncias, conteúdo educativo e pontos de coleta.
+Este é o repositório do back-end, uma plataforma criada para promover o descarte correto de resíduos sólidos, com foco em cidades como São Luís – MA. A API foi construída com Node.js, Express e MongoDB, fornecendo endpoints para cadastro, login, denúncias, conteúdo educativo e pontos de coleta.
 
 ---
 
@@ -124,7 +124,6 @@ Content-Type: application/json
 
 ## 🌐 Deploy
 
-- Front-end hospedado na Vercel
 - Back-end (esta API) hospedado no Render: https://dc-descarte-certo-backend.onrender.com
 
 ---
@@ -133,7 +132,7 @@ Content-Type: application/json
 
 Projeto criado por:
 
-- Hedwesley Gusmão – Back-End com Node.js, MongoDB & Integração com Front-End
+- Hedwesley Gusmão – Back-End com Node.js, MongoDB
 
 ---
 
